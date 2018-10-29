@@ -27,7 +27,7 @@ board.on("ready", function() {
 });
 
         
-
+//The following request will push the credit card through the reader performing a successful swipe
 app.get('/validswipe', (req, res) => {
     if (ready) {
         stepper.rpm(validFowardSwipeSpeed).ccw().step(validSwipeDistance, function() { 
@@ -43,6 +43,7 @@ app.get('/validswipe', (req, res) => {
     }
 });
 
+//The following request will only push the credit card half way through the reader performing an invalid swipe
 app.get('/invalidswipe', (req, res) => {
     if (ready) {
         stepper.rpm(invalidFowardSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
