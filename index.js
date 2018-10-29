@@ -10,7 +10,11 @@ let ready = false;
 
 const validSwipeDistance = 115
 const validFowardSwipeSpeed = 50
-const validSwipeSpeed = 25
+const validReturnSwipeSpeed = 25
+
+const invalidSwipeDistance = 50
+const invalidFowardSwipeSpeed = 50
+const invalidReturnSwipeSpeed = 25
 
 board.on("ready", function() {
     var k = 0; 
@@ -26,9 +30,9 @@ board.on("ready", function() {
 
 app.get('/validswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(fowardSwipeSpeed).ccw().step(swipeDistance, function() { 
+        stepper.rpm(validFowardSwipeSpeed).ccw().step(validSwipeDistance, function() { 
 	    setTimeout(() => {
-                stepper.rpm(returnSwipeSpeed).cw().step(swipeDistance, function() { 
+                stepper.rpm(validReturnSwipeSpeed).cw().step(validSwipeDistance, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
@@ -41,9 +45,9 @@ app.get('/validswipe', (req, res) => {
 
 app.get('/invalidswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(fowardSwipeSpeed).ccw().step(swipeDistance, function() { 
+        stepper.rpm(invalidFowardSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
 	    setTimeout(() => {
-                stepper.rpm(returnSwipeSpeed).cw().step(swipeDistance, function() { 
+                stepper.rpm(invalidReturnSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
@@ -53,5 +57,6 @@ app.get('/invalidswipe', (req, res) => {
         res.send('Board not ready!');
     }
 });
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
