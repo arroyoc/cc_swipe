@@ -8,9 +8,9 @@ var board = new five.Board();
 var stepper;
 let ready = false;
 
-const swipeDistance = 115
-const fowardSwipeSpeed = 50
-const returnSwipeSpeed = 25
+const validSwipeDistance = 115
+const validFowardSwipeSpeed = 50
+const validSwipeSpeed = 25
 
 board.on("ready", function() {
     var k = 0; 
@@ -25,6 +25,21 @@ board.on("ready", function() {
         
 
 app.get('/validswipe', (req, res) => {
+    if (ready) {
+        stepper.rpm(fowardSwipeSpeed).ccw().step(swipeDistance, function() { 
+	    setTimeout(() => {
+                stepper.rpm(returnSwipeSpeed).cw().step(swipeDistance, function() { 
+		    console.log("Done stepping!"); 
+	        }); 
+             }, 500);
+            res.send('Hello World!')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
+app.get('/invalidswipe', (req, res) => {
     if (ready) {
         stepper.rpm(fowardSwipeSpeed).ccw().step(swipeDistance, function() { 
 	    setTimeout(() => {
