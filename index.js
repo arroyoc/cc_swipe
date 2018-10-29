@@ -36,7 +36,7 @@ app.get('/validswipe', (req, res) => {
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
-            res.send('Hello World!')
+            res.send('Valid swipe initiated..')
         });
     } else {
         res.send('Board not ready!');
@@ -52,7 +52,7 @@ app.get('/invalidswipe', (req, res) => {
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
-            res.send('Hello World!')
+            res.send('Invalid swipe initiated..')
         });
     } else {
         res.send('Board not ready!');
