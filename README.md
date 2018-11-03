@@ -12,6 +12,9 @@ node js
 npm
 johnny-five javascript framework
 
+### Flashing arduino
+https://github.com/soundanalogous/AdvancedFirmata Follow directions here to flash your arduino
+
 ### Installing
 
 Install node js (I installed 8.12.0) from https://nodejs.org/en/
