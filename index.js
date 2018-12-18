@@ -60,4 +60,28 @@ app.get('/invalidswipe', (req, res) => {
 });
 
 
+//Start of Small Bot
+
+const validSwipeDistance_small = 1600
+const validFowardSwipeSpeed_small = 250
+const validReturnSwipeSpeed_small = 250
+
+//The following request will push the credit card through the reader performing a successful swipe ON THE SMALL BOT
+app.get('/validswipesmallbot', (req, res) => {
+    if (ready) {
+        stepper.rpm(validFowardSwipeSpeed_small).ccw().step(validSwipeDistance_small, function() { 
+	    setTimeout(() => {
+                stepper.rpm(validReturnSwipeSpeed_small).cw().step(validSwipeDistance_small, function() { 
+		    console.log("Done stepping! on small bot.."); 
+	        }); 
+             }, 500);
+            res.send('Valid swipe initiated on small bot..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
