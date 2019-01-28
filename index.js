@@ -16,6 +16,9 @@ const invalidSwipeDistance = 50
 const invalidFowardSwipeSpeed = 50
 const invalidReturnSwipeSpeed = 25
 
+const FullExtendDistance = 115
+const FullExtendSpeed = 25
+
 board.on("ready", function() {
     var k = 0; 
     stepper = new five.Stepper({ 
@@ -59,6 +62,37 @@ app.get('/invalidswipe', (req, res) => {
     }
 });
 
+//The following request will extend the arm
+app.get('/extendarm', (req, res) => {
+    if (ready) {
+        stepper.rpm(FullExtendSpeed).ccw().step(FullExtendDistance, function() { 
+	    /* setTimeout(() => {
+                stepper.rpm(invalidReturnSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
+		    console.log("Done stepping!"); 
+	        }); 
+             }, 500); */
+            res.send('Invalid swipe initiated..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
+//The following request will retract the arm
+app.get('/retractarm', (req, res) => {
+    if (ready) {
+        stepper.rpm(FullExtendSpeed).cw().step(FullExtendDistance, function() { 
+	    /* setTimeout(() => {
+                stepper.rpm(invalidReturnSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
+		    console.log("Done stepping!"); 
+	        }); 
+             }, 500); */
+            res.send('Invalid swipe initiated..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
 
 //Start of Small Bot
 
