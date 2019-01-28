@@ -71,7 +71,7 @@ app.get('/extendarm', (req, res) => {
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500); */
-            res.send('Invalid swipe initiated..')
+            res.send('Arm extension initiated..')
         });
     } else {
         res.send('Board not ready!');
@@ -87,7 +87,7 @@ app.get('/retractarm', (req, res) => {
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500); */
-            res.send('Invalid swipe initiated..')
+            res.send('Arm retraction initiated..')
         });
     } else {
         res.send('Board not ready!');
