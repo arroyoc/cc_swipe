@@ -62,20 +62,20 @@ app.get('/invalidswipe', (req, res) => {
 
 //Start of Small Bot
 
-const validSwipeDistance_small = 1600
-const validFowardSwipeSpeed_small = 250
-const validReturnSwipeSpeed_small = 250
+const scanDistance_small = 550
+const fowardScanSpeed_small = 150
+const returnScanSpeed_small = 150
 
-//The following request will push the credit card through the reader performing a successful swipe ON THE SMALL BOT
-app.get('/validswipesmallbot', (req, res) => {
+//The following request will perform a scan ON THE SMALL BOT
+app.get('/scansmallbot', (req, res) => {
     if (ready) {
-        stepper.rpm(validFowardSwipeSpeed_small).ccw().step(validSwipeDistance_small, function() { 
+        stepper.rpm(fowardScanSpeed_small).ccw().step(scanDistance_small, function() { 
 	    setTimeout(() => {
-                stepper.rpm(validReturnSwipeSpeed_small).cw().step(validSwipeDistance_small, function() { 
+                stepper.rpm(returnScanSpeed_small).cw().step(scanDistance_small, function() { 
 		    console.log("Done stepping! on small bot.."); 
 	        }); 
              }, 500);
-            res.send('Valid swipe initiated on small bot..')
+            res.send('Scan initiated on small bot..')
         });
     } else {
         res.send('Board not ready!');
@@ -84,4 +84,4 @@ app.get('/validswipesmallbot', (req, res) => {
 
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Automation app listening on port ${port}!`))
