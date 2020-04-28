@@ -8,7 +8,7 @@ var board = new five.Board();
 var stepper;
 let ready = false;
 
-const validSwipeDistance = 115
+const validSwipeDistance = 100
 const validFowardSwipeSpeed = 50
 const validReturnSwipeSpeed = 25
 
