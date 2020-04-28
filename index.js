@@ -46,7 +46,7 @@ app.get('/validswipe', (req, res) => {
 //The following request will push the credit card through the reader performing a successful swipe
 app.get('/testswipe', (req, res) => {
     if (ready) {
-        stepper.step({ steps: 2000, direction: 1, accel: 1600, decel: 1600 }, function(){
+        stepper.step({ steps: 1000, direction: 1, accel: 95, decel: 25 }, function(){
         // stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
 	    // setTimeout(() => {
         //         stepper.rpm(validReturnSwipeSpeed).ccw().step(validSwipeDistance, function() { 
