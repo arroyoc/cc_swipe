@@ -48,11 +48,11 @@ app.get('/testswipe', (req, res) => {
     if (ready) {
         stepper.step({ steps: 95, direction: 1, accel: 95, decel: 25 }, function(){
         // stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
-	    // setTimeout(() => {
-        //         stepper.rpm(validReturnSwipeSpeed).ccw().step(validSwipeDistance, function() { 
-		//     console.log("Done stepping!"); 
-	    //     }); 
-        //      }, 500);
+	    setTimeout(() => {
+            stepper.step({ steps: 95, direction: 2, accel: 95, decel: 25 }, function() { 
+		    console.log("Done stepping!"); 
+	        }); 
+             }, 500);
             res.send('Valid swipe initiated..')
         });
     } else {
