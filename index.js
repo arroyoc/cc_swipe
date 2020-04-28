@@ -43,6 +43,23 @@ app.get('/validswipe', (req, res) => {
     }
 });
 
+//The following request will push the credit card through the reader performing a successful swipe
+app.get('/testswipe', (req, res) => {
+    if (ready) {
+        stepper.step({ steps: 2000, direction: 1, accel: 1600, decel: 1600 }, function(){
+        // stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
+	    // setTimeout(() => {
+        //         stepper.rpm(validReturnSwipeSpeed).ccw().step(validSwipeDistance, function() { 
+		//     console.log("Done stepping!"); 
+	    //     }); 
+        //      }, 500);
+            res.send('Valid swipe initiated..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
 //The following request will only push the credit card half way through the reader performing an invalid swipe
 app.get('/invalidswipe', (req, res) => {
     if (ready) {
