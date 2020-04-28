@@ -49,7 +49,7 @@ app.get('/testswipe', (req, res) => {
         stepper.step({ steps: 95, direction: 1, accel: 95, decel: 25 }, function(){
         // stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
 	    setTimeout(() => {
-            stepper.step({ steps: 95, direction: 2, accel: 95, decel: 25 }, function() { 
+            stepper.step({ steps: 95, direction: 0, accel: 95, decel: 25 }, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
