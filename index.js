@@ -9,7 +9,7 @@ var stepper;
 let ready = false;
 
 const validSwipeDistance = 95
-const validFowardSwipeSpeed = 60
+const validFowardSwipeSpeed = 75
 const validReturnSwipeSpeed = 25
 
 const invalidSwipeDistance = 50
