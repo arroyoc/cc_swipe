@@ -28,4 +28,7 @@ npm install
 
 Start server with `node index.js`
 
+Or to start server as a service use forever (https://github.com/foreversd/forever)
+forever start index.js
+
 To swipe a card hit localhost:3000/validswipe
