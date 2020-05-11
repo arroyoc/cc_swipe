@@ -63,9 +63,9 @@ app.get('/testswipe', (req, res) => {
 //The following request will only push the credit card half way through the reader performing an invalid swipe
 app.get('/invalidswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(invalidFowardSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
+        stepper.rpm(invalidFowardSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
 	    setTimeout(() => {
-                stepper.rpm(invalidReturnSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
+                stepper.rpm(invalidReturnSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
