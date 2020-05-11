@@ -8,7 +8,7 @@ var board = new five.Board();
 var stepper;
 let ready = false;
 
-const validSwipeDistance = 115
+const validSwipeDistance = 92
 const validFowardSwipeSpeed = 50
 const validReturnSwipeSpeed = 25
 
@@ -30,9 +30,26 @@ board.on("ready", function() {
 //The following request will push the credit card through the reader performing a successful swipe
 app.get('/validswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(validFowardSwipeSpeed).ccw().step(validSwipeDistance, function() { 
+        stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
 	    setTimeout(() => {
-                stepper.rpm(validReturnSwipeSpeed).cw().step(validSwipeDistance, function() { 
+                stepper.rpm(validReturnSwipeSpeed).ccw().step(validSwipeDistance, function() { 
+		    console.log("Done stepping!"); 
+	        }); 
+             }, 500);
+            res.send('Valid swipe initiated..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
+//The following request will push the credit card through the reader performing a successful swipe
+app.get('/testswipe', (req, res) => {
+    if (ready) {
+        stepper.step({ steps: 80, direction: 1, accel: 1000, decel: 100 }, function(){
+        // stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
+	    setTimeout(() => {
+            stepper.step({ steps: 80, direction: 0, accel: 500, decel: 100 }, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
@@ -46,9 +63,9 @@ app.get('/validswipe', (req, res) => {
 //The following request will only push the credit card half way through the reader performing an invalid swipe
 app.get('/invalidswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(invalidFowardSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
+        stepper.rpm(invalidFowardSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
 	    setTimeout(() => {
-                stepper.rpm(invalidReturnSwipeSpeed).cw().step(invalidSwipeDistance, function() { 
+                stepper.rpm(invalidReturnSwipeSpeed).ccw().step(invalidSwipeDistance, function() { 
 		    console.log("Done stepping!"); 
 	        }); 
              }, 500);
