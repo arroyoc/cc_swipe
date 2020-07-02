@@ -8,7 +8,7 @@ var board = new five.Board();
 var stepper;
 let ready = false;
 
-const validSwipeDistance = 200
+const validSwipeDistance = 400
 const validFowardSwipeSpeed = 50
 const validReturnSwipeSpeed = 25
 
@@ -46,7 +46,7 @@ app.get('/validswipe', (req, res) => {
 //The following request will push the credit card through the reader performing a successful swipe
 app.get('/fullswipe', (req, res) => {
     if (ready) {
-        stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
+        stepper.rpm(validFowardSwipeSpeed).ccw().step(validSwipeDistance, function() { 
             res.send('full swipe initiated..')
         });
     } else {
