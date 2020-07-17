@@ -13,7 +13,7 @@ const validFowardSwipeSpeed = 50
 const validReturnSwipeSpeed = 25
 
 const invalidSwipeDistance = 50
-const invalidFowardSwipeSpeed = 50
+const invalidFowardSwipeSpeed = 25
 const invalidReturnSwipeSpeed = 25
 
 board.on("ready", function() {
@@ -47,12 +47,26 @@ app.get('/validswipe', (req, res) => {
 app.get('/fullswipe', (req, res) => {
     if (ready) {
         stepper.rpm(validFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
-            res.send('Valid swipe initiated..')
+            res.send('full swipe initiated..')
         });
     } else {
         res.send('Board not ready!');
     }
 });
+
+//The following request will push the credit card through the reader performing a successful swipe
+app.get('/fullswipe', (req, res) => {
+    if (ready) {
+        stepper.rpm(invalidFowardSwipeSpeed).cw().step(validSwipeDistance, function() { 
+            res.send('slow swipe initiated..')
+        });
+    } else {
+        res.send('Board not ready!');
+    }
+});
+
+
+
 
 //The following request will push the credit card through the reader performing a successful swipe
 app.get('/testswipe', (req, res) => {
