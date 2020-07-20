@@ -48,6 +48,7 @@ app.get('/fullrotation', (req, res) => {
     if (ready) {
         stepper.rpm(validSwipeSpeed).ccw().step(fullRotationDistance, function() { 
             res.send('full rotation initiated..')
+            console.log("Done swiping..");
         });
     } else {
         res.send('Board not ready!');
